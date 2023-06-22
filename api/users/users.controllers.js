@@ -33,7 +33,7 @@ exports.signup = async (req, res) => {
     req.body.password = await passHash(password);
     const newUser = await User.create(req.body);
     const token = generateToken(newUser);
-    res.status(201).json(token);
+    res.status(201).json({ Token: token });
   } catch (err) {
     res.status(500).json("Server Error");
   }
