@@ -22,6 +22,8 @@ const generateToken = (user) => {
 
 exports.signin = async (req, res) => {
   try {
+    const token = generateToken(req.user);
+    return res.status(200).json({ token });
   } catch (err) {
     res.status(500).json("Server Error");
   }
@@ -33,7 +35,7 @@ exports.signup = async (req, res) => {
     req.body.password = await passHash(password);
     const newUser = await User.create(req.body);
     const token = generateToken(newUser);
-    res.status(201).json({ Token: token });
+    res.status(201).json({ token });
   } catch (err) {
     res.status(500).json("Server Error");
   }
