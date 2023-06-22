@@ -5,8 +5,13 @@ const passport = require("passport");
 
 router.post("/signup", signup);
 router.post(
-  "/signin",
-  passport.authenticate("local", { session: false }),
+  "/signin/user",
+  passport.authenticate("local-username", { session: false }),
+  signin
+);
+router.post(
+  "/signin/email",
+  passport.authenticate("local-email", { session: false }),
   signin
 );
 router.get("/users", getUsers);
