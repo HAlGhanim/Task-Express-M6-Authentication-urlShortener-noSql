@@ -25,7 +25,7 @@ exports.signin = async (req, res) => {
     const token = generateToken(req.user);
     return res.status(200).json({ token });
   } catch (err) {
-    res.status(500).json("Server Error");
+    res.status(500).json(err.message);
   }
 };
 
@@ -37,7 +37,7 @@ exports.signup = async (req, res) => {
     const token = generateToken(newUser);
     res.status(201).json({ token });
   } catch (err) {
-    res.status(500).json("Server Error");
+    res.status(500).json(err.message);
   }
 };
 
@@ -46,6 +46,6 @@ exports.getUsers = async (req, res) => {
     const users = await User.find().populate("urls");
     res.status(201).json(users);
   } catch (err) {
-    res.status(500).json("Server Error");
+    res.status(500).json(err.message);
   }
 };
